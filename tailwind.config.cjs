@@ -13,6 +13,7 @@ module.exports = {
 				'bg-text': '#D6DBF5',
 				'correct-green': '#94D7A2',
 				'wrong-red': '#F8BCBC',
+				stroke: '#DBDEF0',
 			},
 		},
 	},
