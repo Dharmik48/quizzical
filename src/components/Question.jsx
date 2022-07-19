@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import Choice from './Choice';
 
-function Question({ questionData, ansRevealed, points }) {
+function Question({ questionData, ansRevealed, setPoints, questions }) {
 	const [ansIndex, setAnsIndex] = useState(randomIndex());
 	const [selectedAns, setSelectedAns] = useState('');
 	const [choices, setChoices] = useState([]);
+
 	function randomIndex() {
 		return Math.floor(Math.random() * 4);
 	}
+
+	useEffect(() => {
+		ansRevealed &&
+			ansIndex === selectedAns &&
+			setPoints(prevPoints => (prevPoints += 1));
+	}, [ansRevealed]);
 
 	useEffect(() => {
 		const allChoices = [...questionData.incorrect_answers];
@@ -15,7 +22,9 @@ function Question({ questionData, ansRevealed, points }) {
 		setChoices(
 			allChoices.map((choice, i) => ({ id: i, text: choice, selected: false }))
 		);
-	}, []);
+		setAnsIndex(randomIndex());
+		setSelectedAns('');
+	}, [questions]);
 
 	function renderChoices() {
 		return choices.map(choice => (
@@ -26,7 +35,6 @@ function Question({ questionData, ansRevealed, points }) {
 				selectedAns={selectedAns}
 				key={choice.id}
 				ansIndex={ansIndex}
-				points={points}
 			/>
 		));
 	}

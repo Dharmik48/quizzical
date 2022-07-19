@@ -4,7 +4,6 @@ function Choice({
 	ansRevealed,
 	setSelectedAns,
 	selectedAns,
-	points,
 }) {
 	let styles = 'border-btn-blue';
 	if (!ansRevealed && selectedAns === choice.id) {
@@ -12,9 +11,6 @@ function Choice({
 	} else if (ansRevealed && choice.id === ansIndex) {
 		styles = 'border-correct-green bg-correct-green';
 	} else if (ansRevealed && choice.id === selectedAns) {
-		console.log(points);
-		points -= 1;
-		console.log(points);
 		styles = 'border-wrong-red bg-wrong-red opacity-60';
 	} else if (ansRevealed) {
 		styles = 'border-btn-blue opacity-60';
