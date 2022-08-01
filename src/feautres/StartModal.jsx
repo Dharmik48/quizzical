@@ -1,13 +1,33 @@
 import React from "react"
 import { Modal } from "../components/Modal"
-import { categories } from "../components/_categories"
 
 export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
+  const [categories, setCategories] = React.useState([])
   const [params, setParams] = React.useState({
     amount: 10, // do something with this ??
+    type: "multiple",
     category: null,
     difficulty: null,
   })
+
+  React.useEffect(() => {
+    async function fetchCategories() {
+      const response = await fetch("https://opentdb.com/api_category.php")
+      try {
+        if (response.ok) {
+          const responseData = await response.json()
+          return responseData.trivia_categories
+        }
+        throw new Error("Something went wrong")
+      } catch (err) {
+        // do something
+        console.log(err)
+      }
+    }
+    fetchCategories().then((res) => {
+      setCategories(res)
+    })
+  }, [])
 
   React.useEffect(() => {
     let query = Object.keys(params)
@@ -49,22 +69,28 @@ export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
       {/* maybe add amount of questions here? */}
 
       <div className="flex gap-2 flex-wrap mt-4">
-        {categories
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .map((category, index) => (
-            <div
-              key={index}
-              className={`${
-                params.category === category.id ? "bg-slate-200" : "bg-slate-50"
-              } hover:bg-slate-200 rounded-xl p-2 cursor-pointer`}
-              onClick={() => {
-                console.log("test")
-                setParams({ ...params, category: category.id })
-              }}
-            >
-              <span className="text-sm">{category.name}</span>
-            </div>
-          ))}
+        {categories ? (
+          categories
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((category, index) => (
+              <div
+                key={index}
+                className={`${
+                  params.category === category.id
+                    ? "bg-slate-200"
+                    : "bg-slate-50"
+                } hover:bg-slate-200 rounded-xl p-2 cursor-pointer`}
+                onClick={() => {
+                  console.log("test")
+                  setParams({ ...params, category: category.id })
+                }}
+              >
+                <span className="text-sm">{category.name}</span>
+              </div>
+            ))
+        ) : (
+          <span>Loading...</span>
+        )}
       </div>
       <div></div>
       <div className="flex gap-x-4 ml-auto">
