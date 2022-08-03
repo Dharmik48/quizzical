@@ -31,8 +31,12 @@ npm run dev
 ![img](https://i.imgur.com/6eV4AY7.png)
 ![img](https://i.imgur.com/1VdDfo1.png)
 
-##  Thanks to all Contributors
+## Thanks to all Contributors
 
 Thanks a lot for spending your time helping quizzical to grow. Thanks a lot!
 
 [![Contributors](https://contrib.rocks/image?repo=Dharmik48/quizzical)](https://github.com/Dharmik48/quizzical/graphs/contributors)
+
+## Please Leave a ⭐
+
+It will help a lot if you can give a ⭐ to the repository.
