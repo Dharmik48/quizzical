@@ -7,8 +7,9 @@ export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
     amount: 10, // do something with this ??
     type: "multiple",
     category: null,
-    difficulty: null,
+    difficulty: "easy",
   })
+
 
   React.useEffect(() => {
     async function fetchCategories() {
@@ -39,6 +40,7 @@ export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
         return `${key}=${value}`
       })
       .join("&")
+
     onSelectParams(query)
     // do something with new query
   }, [params])
@@ -50,36 +52,49 @@ export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
 
   return (
     <Modal>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center w-full">
+        <h2 className="text-xl">Choose a Level</h2>
+        {/* difficulty selector here */}
+        <p className="text-gray-500 mt-1">
+          Select a level and challenge yourself{" "}
+        </p>
+      </div>
+
+      <div className="flex flex-row mb-4">
+        <div className="flex items-center mx-2">
+          <input id="default-radio-1" type="radio" value="easy" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={evt => { setParams({...params, difficulty: evt.target.value})}}/>
+          <label htmlFor="default-radio-1" className="ml-2 text-sm ">Easy</label>
+        </div>
+        <div className="flex items-center mx-2">
+          <input id="default-radio-2" type="radio" value="medium" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={evt => { setParams({...params, difficulty: evt.target.value})}}/>
+          <label htmlFor="default-radio-2" className="ml-2 text-sm ">Medium</label>
+        </div>
+        <div className="flex items-center mx-2">
+          <input id="default-radio-3" type="radio" value="hard" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange={evt => { setParams({...params, difficulty: evt.target.value})}}/>
+          <label htmlFor="default-radio-3" className="ml-2 text-sm ">Hard</label>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center w-full">
         <h2 className="text-xl">Choose a Category</h2>
         <p className="text-gray-500 mt-1">
           Select a category below that you think is fun{" "}
         </p>
       </div>
 
-      {/* difficulty selector here */}
-      <div>
-        <span onClick={() => setParams({ ...params, difficulty: "easy" })}>
-          easy
-        </span>
-        <span>medium</span>
-        <span>hard</span>
-      </div>
-
       {/* maybe add amount of questions here? */}
 
-      <div className="flex gap-2 flex-wrap mt-4">
+      <div className="flex gap-2 flex-wrap">
         {categories ? (
           categories
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((category, index) => (
               <div
                 key={index}
-                className={`${
-                  params.category === category.id
+                className={`${params.category === category.id
                     ? "bg-slate-200"
                     : "bg-slate-50"
-                } hover:bg-slate-200 rounded-xl p-2 cursor-pointer`}
+                  } hover:bg-slate-200 rounded-xl p-2 cursor-pointer`}
                 onClick={() => {
                   console.log("test")
                   setParams({ ...params, category: category.id })
