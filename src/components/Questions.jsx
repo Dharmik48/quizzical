@@ -6,6 +6,7 @@ function Questions({ url }) {
   const [questions, setQuestions] = useState([])
   const [points, setPoints] = useState(0)
   const [scoreText, setScoreText] = useState("")
+  const [answeredIndex, setAnsweredIndex] = useState(0)
 
   useEffect(() => {
     fetch(url)
@@ -27,14 +28,19 @@ function Questions({ url }) {
       throw new Error("Something went Wrong")
     } catch (err) {
       // do something
-      console.log(err)
+      console.log(answeredIndex)
     }
+  }
+
+  function handleSubmit() {
+    answeredIndex === questions.length && setAnsRevealed(true)
   }
 
   function renderQuestions() {
     return questions.map((question, i) => (
       <Question
         key={i}
+        setAnsweredIndex={setAnsweredIndex}
         questionData={question}
         ansRevealed={ansRevealed}
         setPoints={setPoints}
@@ -48,6 +54,7 @@ function Questions({ url }) {
       window.scrollTo({ top: 0, behavior: "smooth" })
       setQuestions(response)
       setAnsRevealed(false)
+      setAnsweredIndex(0)
       setPoints(0)
     })
   }
@@ -74,10 +81,16 @@ function Questions({ url }) {
               >
                 Play again
               </button>
+            ) : answeredIndex < 10 ? (
+              <p className="text-md font-karla text-text-blue md:text-xl lg:text-2xl">
+                Select the remaining {questions.length - answeredIndex}{" "}
+                questions
+              </p>
             ) : (
               <button
                 className="self-center text-white bg-btn-blue font-inter px-6 py-2 rounded-md shadow-xl cursor-pointer transition-all hover:opacity-80 active:scale-90 focus:opacity-80 md:text-xl md:px-12 md:py-4 md:rounded-lg"
-                onClick={() => setAnsRevealed(true)}
+                onClick={handleSubmit}
+                disabled={answeredIndex < 10}
               >
                 Check Answers
               </button>
