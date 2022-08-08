@@ -81,7 +81,7 @@ function Questions({ url }) {
               >
                 Play again
               </button>
-            ) : answeredIndex < 10 ? (
+            ) : answeredIndex < questions.length ? (
               <p className="text-md font-karla text-text-blue md:text-xl lg:text-2xl">
                 Select the remaining {questions.length - answeredIndex}{" "}
                 questions
@@ -90,7 +90,6 @@ function Questions({ url }) {
               <button
                 className="self-center text-white bg-btn-blue font-inter px-6 py-2 rounded-md shadow-xl cursor-pointer transition-all hover:opacity-80 active:scale-90 focus:opacity-80 md:text-xl md:px-12 md:py-4 md:rounded-lg"
                 onClick={handleSubmit}
-                disabled={answeredIndex < 10}
               >
                 Check Answers
               </button>
