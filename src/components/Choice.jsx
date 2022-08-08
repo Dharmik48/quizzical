@@ -1,4 +1,13 @@
-function Choice({ choice, ansRevealed, setSelectedAns, selectedAns, answer }) {
+import { useEffect, useState } from "react"
+
+function Choice({
+  choice,
+  ansRevealed,
+  setSelectedAns,
+  selectedAns,
+  answer,
+  handleFirstClick,
+}) {
   let styles = "border-btn-blue"
   if (!ansRevealed && selectedAns === choice.text) {
     styles = "bg-bg-text border-bg-text"
@@ -10,8 +19,9 @@ function Choice({ choice, ansRevealed, setSelectedAns, selectedAns, answer }) {
     styles = "border-btn-blue opacity-60"
   }
 
-  function handleClick(event) {
+  function handleClick() {
     !ansRevealed && setSelectedAns(choice.text)
+    handleFirstClick()
   }
 
   return (

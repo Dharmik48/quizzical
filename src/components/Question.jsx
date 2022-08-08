@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react"
 import Choice from "./Choice"
 
-function Question({ questionData, ansRevealed, setPoints, questions }) {
+function Question({
+  questionData,
+  ansRevealed,
+  setPoints,
+  questions,
+  setAnsweredIndex,
+}) {
   const [selectedAns, setSelectedAns] = useState("")
   const [choices, setChoices] = useState([])
+  const [click, setClick] = useState(0)
+
   const answer = questionData && questionData.correct_answer
 
   function randomIndex(max) {
     return Math.floor(Math.random() * Math.floor(max))
   }
 
+  function handleFirstClick() {
+    if (click === 0) {
+      setClick((state) => state + 1)
+      setAnsweredIndex((state) => state + 1)
+    }
+  }
+
   useEffect(() => {
     ansRevealed &&
       answer === selectedAns &&
       setPoints((prevPoints) => (prevPoints += 1))
+    setClick(0)
   }, [ansRevealed])
 
   useEffect(() => {
@@ -35,6 +51,7 @@ function Question({ questionData, ansRevealed, setPoints, questions }) {
       <Choice
         ansRevealed={ansRevealed}
         setSelectedAns={setSelectedAns}
+        handleFirstClick={handleFirstClick}
         choice={choice}
         selectedAns={selectedAns}
         key={choice.id}
