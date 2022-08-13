@@ -31,7 +31,11 @@ function App() {
       {showWelcome ? (
         <WelcomeScreen setShowModal={setShowModal} />
       ) : (
-        <Questions url={url} />
+        <Questions
+        url={url}
+        setShowModal={setShowModal}
+        setShowWelcome={setShowWelcome}
+        />
       )}
 
       {showModal && (
