@@ -69,7 +69,7 @@ function Questions({ url, setShowModal, setShowWelcome }) {
       {questions?.length ? (
         <>
           <button
-            className="self-start text-white bg-btn-blue font-inter px-6 py-2 rounded-md shadow-xl cursor-pointer transition-all hover:opacity-80 active:scale-90 focus:opacity-80 md:text-xl md:px-12 md:py-4 md:rounded-lg"
+            className="text-sm self-start text-white bg-btn-blue font-inter py-1 px-2 md:text-lg lg:text-lg lg:px-8 rounded-md shadow-xl cursor-pointer transition-all hover:opacity-80 active:scale-90 focus:opacity-80 md:rounded-lg"
             onClick={goBack}
           >
           Back
