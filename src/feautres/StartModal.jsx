@@ -74,7 +74,31 @@ export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
           <label htmlFor="default-radio-3" className="ml-2 text-sm ">Hard</label>
         </div>
       </div>
-
+      <div>
+				<div className="flex flex-col items-center w-full">
+					<h2 className="text-xl">Choose Number of Question</h2>
+				</div>
+				<select
+					id="questions"
+					class="bg-gray-50 border text-gray-500 text-l rounded-lg block p-3.5"
+				>
+					<option selected>
+						Choose how many questions you are comfortable with.
+					</option>
+					<option value="5" align="center">
+						5
+					</option>
+					<option value="10" align="center">
+						10
+					</option>
+					<option value="15" align="center">
+						15
+					</option>
+					<option value="20" align="center">
+						20
+					</option>
+				</select>
+			</div>
       <div className="flex flex-col items-center w-full">
         <h2 className="text-xl">Choose a Category</h2>
         <p className="text-gray-500 mt-1">
