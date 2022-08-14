@@ -4,7 +4,7 @@ import { Modal } from "../components/Modal";
 export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
 	const [categories, setCategories] = React.useState([]);
 	const [params, setParams] = React.useState({
-		amount: 10, // do something with this ??
+		amount: 5, // do something with this ??
 		type: "multiple",
 		category: null,
 		difficulty: "easy",
@@ -121,7 +121,7 @@ export function StartModal({ onClose, onSelectParams, setShowWelcome }) {
 							setParams({ ...params, amount: e.target.value });
 						}}
 					>
-						<option value="5" align="center" selected>
+						<option value="5" align="center" defaultValue={5}>
 							5
 						</option>
 						<option value="10" align="center">
