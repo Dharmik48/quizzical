@@ -32,17 +32,14 @@ function App() {
         <WelcomeScreen setShowModal={setShowModal} />
       ) : (
         <Questions
-        url={url}
-        setShowModal={setShowModal}
-        setShowWelcome={setShowWelcome}
+          url={url}
+          setShowModal={setShowModal}
+          setShowWelcome={setShowWelcome}
         />
       )}
 
       {showModal && (
-        <Portal
-          className="portal"
-          onClick={() => setShowModal((prev) => !prev)}
-        />
+        <Portal className="portal" onClick={() => setShowModal(false)} />
       )}
       {showModal && (
         <StartModal
