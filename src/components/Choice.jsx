@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { decode } from "html-entities"
 
 function Choice({
   choice,
@@ -33,7 +33,7 @@ function Choice({
       } ${styles}`}
       onClick={handleClick}
     >
-      {choice.text}
+      {decode(choice.text)}
     </button>
   )
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Choice from "./Choice"
+import { decode } from "html-entities"
 
 function Question({
   questionData,
@@ -64,7 +65,7 @@ function Question({
   return (
     <div className="flex flex-col gap-4 border-b-2 pb-4 w-full border-b-stroke lg:gap-6 lg:pb-6">
       <p className="text-md font-karla text-text-blue md:text-xl lg:text-2xl">
-        {questionData.question}
+        {decode(questionData.question)}
       </p>
       <div className="flex flex-wrap gap-4 lg:gap-8">{renderChoices()}</div>
     </div>
